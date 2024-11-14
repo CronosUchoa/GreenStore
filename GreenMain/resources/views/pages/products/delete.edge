@@ -1,0 +1,22 @@
+@layouts.app()
+
+<div style="width: 400px; height: 400px; background-color: white; 
+            position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%);">
+           @each(product in products)
+         <div>  
+           <p>{{ product.name }}</p>
+           <form method="POST" action="{{route('products.destroy', { id: product.id })}}?_method=delete">
+           @button({
+            type: 'submit',
+            class: 'text-center m-16 sm:mx-auto sm:w-full sm:max-w-md'
+            })
+            Excluir
+            @end
+           </form>
+        </div>
+         @endeach
+         @include('components/layouts/partials/alert')
+@end
+</div>
+        

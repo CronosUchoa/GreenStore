@@ -1,0 +1,82 @@
+@layouts.app()
+  @form({ action: route('products.store'), method: 'POST' })
+  <div class="flex min-h-[80vh] flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="text-center m-16 sm:mx-auto sm:w-full sm:max-w-md">
+      <h1 class="text-3xl font-bold text-gray-900">
+        Criar Produto
+      </h1>
+    </div>
+    <div class="font-bold  text-center sm:mx-auto sm:w-full sm:max-w-md">
+      <label for="name">
+        Nome do Produto
+      </label>
+      @!input({
+        name: 'name',
+        type: 'text'
+      })
+    </div>
+   
+
+    <div class="font-bold text-center sm:mx-auto sm:w-full sm:max-w-md">
+      <label for="pricer">
+        Preço
+      </label>
+      @!input({
+        name: 'price',
+        type: 'text'
+      })
+    </div>
+
+    <div class="font-bold text-center sm:mx-auto sm:w-full sm:max-w-md">
+      <label for="description">
+        Descrição
+      </label>
+      @!input({
+        name: 'description',
+        type: 'text'
+      })
+    </div>
+
+    
+    <div class="font-bold text-center sm:mx-auto sm:w-full sm:max-w-md">
+      <label for="image">
+        Imagem
+      </label>
+      @!input({
+        name: 'image',
+        type: 'text'
+      })
+    </div>
+
+    
+    <div class="text-center m-4 sm:mx-auto sm:w-full sm:max-w-md">
+      <label for="deviceId" class="font-bold">
+        Plataforma
+      </label>
+      <select name="deviceId" class="text-center sm:mx-auto sm:w-full sm:max-w-md">
+        @each(device in devices)
+          <option value="{{ device.id }}">{{ device.name }}</option>
+        @end
+      </select>
+    </div>
+
+    <div class="text-center m-4 sm:mx-auto sm:w-full sm:max-w-md">
+      <label for="categoryId" class="font-bold">
+        Categoria
+      </label>
+      <select name="categoryId" class="text-center sm:mx-auto sm:w-full sm:max-w-md">
+        @each(category in categories)
+          <option value="{{ category.id }}">{{ category.name }}</option>
+        @end
+      </select>
+    </div>  
+
+    @button({
+      type: 'submit',
+      class: 'text-center m-16 sm:mx-auto sm:w-full sm:max-w-md'
+    })
+      Salvar
+    @end
+  @end
+@end
+</div>

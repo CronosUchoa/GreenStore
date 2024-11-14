@@ -1,0 +1,9 @@
+@layouts.app()
+  {{ device.name }}
+
+  @each(product in device.products)
+    <div>
+      <a href="{{ route('products.show', { id: product.id }) }}">{{ product.name }}</a>
+    </div>
+  @end
+@end

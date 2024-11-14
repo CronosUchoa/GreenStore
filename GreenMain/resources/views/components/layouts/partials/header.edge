@@ -1,0 +1,214 @@
+<script>
+  function toggleMenu(menuId) {
+    const menu = document.getElementById(menuId);
+    const button = document.querySelector(`[data-target="${menuId}"]`);
+    
+    // Fecha outros menus
+    document.querySelectorAll('[id$="Menu"]').forEach(otherMenu => {
+      if (otherMenu.id !== menuId && !otherMenu.classList.contains('hidden')) {
+        otherMenu.classList.add('hidden');
+        const otherButton = document.querySelector(`[data-target="${otherMenu.id}"]`);
+        otherButton?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  
+    menu.classList.toggle('hidden');
+    
+    // Adiciona evento para fechar ao clicar fora
+    if (!menu.classList.contains('hidden')) {
+      setTimeout(() => {
+        document.addEventListener('click', function closeMenu(e) {
+          if (!menu.contains(e.target) && !button.contains(e.target)) {
+            menu.classList.add('hidden');
+            document.removeEventListener('click', closeMenu);
+          }
+        });
+      }, 0);
+    }
+  }
+  
+  function toggleMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+  }
+  </script>
+  
+  <nav class="bg-gradient-to-r from-emerald-700 to-emerald-600 w-full min-w-full fixed top-0 left-0 z-10">
+    <div class="max-w-full mx-auto px-4">
+      <div class="flex items-center justify-between h-24">
+        <!-- Logo e Nome -->
+        <div class="flex items-center space-x-4">
+          <a href="{{ route('home.show') }}" class="flex items-center space-x-3">
+            {{--  <img src="resources/images/logo.png" alt="Logo" class="w-16 h-16 rounded-full">  --}}
+            <div class="bg-white p-2 rounded-full">
+              <div class="w-8 h-8 bg-emerald-700 rounded-full flex items-center justify-center">
+                <span class="text-white text-lg">GS</span>
+              </div>
+            </div>
+            <span class="text-white text-xl font-bold">GreenStore</span>
+          </a>
+        </div>
+  
+        <!-- Links de Navegação -->
+        <div class="hidden md:flex flex-grow justify-center items-center space-x-8">
+          <!-- Categoria -->
+          <div class="relative">
+            <button data-target="categoriaMenu"
+                    onclick="toggleMenu('categoriaMenu')"
+                    class="flex items-center space-x-1 text-white hover:text-emerald-200">
+              <span>Categoria</span>
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <div id="categoriaMenu" class="hidden absolute z-50 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <div class="py-1">
+                <a href="{{ route('products.fps') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">FPS</a>
+                <a href="{{ route('products.rpg') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">RPG</a>
+                <a href="{{ route('products.mmorpg') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">MMORPG</a>
+                <a href="{{ route('products.batleRoyale') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Battle Royale</a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- PC -->
+          <div class="relative">
+            <button data-target="pcMenu"
+                    onclick="toggleMenu('pcMenu')"
+                    class="flex items-center space-x-1 text-white hover:text-emerald-200">
+              <span>PC</span>
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <div id="pcMenu" class="hidden absolute z-50 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <div class="py-1">
+                <a href="{{ route('products.stream') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Steam</a>
+                <a href="{{ route('products.epicGames') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Epic Games</a>
+                <a href="{{ route('products.roblox') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Roblox</a>
+                <a href="{{ route('products.ubisoftConnect') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Ubisoft Connect</a>
+                <a href="{{ route('products.rockstarSocialClub') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Rockstar Social Club</a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Console -->
+          <div class="relative">
+            <button data-target="consoleMenu"
+                    onclick="toggleMenu('consoleMenu')"
+                    class="flex items-center space-x-1 text-white hover:text-emerald-200">
+              <span>Console</span>
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <div id="consoleMenu" class="hidden absolute z-50 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <div class="py-1">
+                <a href="{{ route('products.playStation') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">PlayStation</a>
+                <a href="{{ route('products.xbox') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Xbox</a>
+                <a href="{{ route('products.nintendo') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Nintendo</a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Mobile -->
+          <div class="relative">
+            <button data-target="mobileMenu"
+                    onclick="toggleMenu('mobileMenu')"
+                    class="flex items-center space-x-1 text-white hover:text-emerald-200">
+              <span>Mobile</span>
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <div id="mobileMenu" class="hidden absolute z-50 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <div class="py-1">
+                <a href="{{ route('products.googlePlay') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Google Play</a>
+                <a href="{{ route('products.appStore') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">App Store</a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Botões de Autenticação -->
+        <div class="flex items-center space-x-4">
+          @if(auth.isAuthenticated)
+          <div class="relative">
+            <button data-target="userMenu"
+                    onclick="toggleMenu('userMenu')"
+                    class="flex items-center space-x-2 text-white hover:text-emerald-200">
+              <span>{{ auth.user.email }}</span>
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+              <a href="{{ route('users.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Editar Perfil</a>
+              <a href="{{ route('auth.destroy') }}" 
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">
+                Sair
+              </a>
+           
+            </div>
+          </div>
+          @else
+          <a href="{{ route('users.create') }}"
+             class="text-white hover:text-emerald-200 px-4 py-2">
+            Sign In
+          </a>
+          <a href="{{ route('auth.create') }}"
+             class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
+            Login
+          </a>
+          @end
+  
+          @if(auth.isAuthenticated && auth.user.email == 'admin@admin.com')
+
+          <div class="hidden md:flex flex-grow justify-center items-center space-x-8">
+            <!-- Administrador -->
+            <div class="relative">
+              <button data-target="Administrador"
+                      onclick="toggleMenu('Administrador')"
+                      class="flex items-center space-x-1 text-white bg-gray-800 px-4 py-2 rounded-md hover:text-emerald-200">
+                <span>Administrador</span>
+                <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              <div id="Administrador" class="hidden absolute z-50 mt-2 w-48 bg-white rounded-md shadow-lg">
+                <div class="py-1">
+                  <a href="{{ route('products.create') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Criar Produto</a>
+                  <a href="{{ route('products.delete') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Delete Produto</a>
+                  <a href="{{ route('categories.create') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Criar Categoria</a>
+                  <a href="{{ route('devices.create') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Criar Plataforma</a>
+                  
+                  {{--  <a href="{{ route('products.patch') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Alterar Produto</a>
+                  <a href="{{ route('products.destroy') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50">Deletar Produto</a>  --}}
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+          @end
+  
+        <!-- Botão Mobile -->
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-white p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+  
+      <!-- Menu Mobile -->
+      <div class="mobile-menu hidden md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="#" class="block px-3 py-2 rounded-md text-white hover:bg-emerald-800">Categoria</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-white hover:bg-emerald-800">PC</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-white hover:bg-emerald-800">Console</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-white hover:bg-emerald-800">Mobile</a>
+        </div>
+      </div>
+    </div>
+  </nav>

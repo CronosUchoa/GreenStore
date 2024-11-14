@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-grafit-button {
+    background-color: #fff; /* Remove o fundo no hover */
+    /* Adiciona borda vermelha */
+    color: #2F2F2F; /* Mantém o texto vermelho */
+
+  
+}
+
+.custom-grafit-button:hover {
+    background-color: #2F2F2F; /* Fundo vermelho claro */
+    color: #fff; /* Texto vermelho escuro */
+    border: none;
+    transition: all 0.3s ease;
+}
+

@@ -1,0 +1,39 @@
+@layouts.app()
+ <form method="POST" action="{{route('users.patch', { id: user.id })}}?_method=patch">
+    <div class="flex min-h-[80vh] flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="text-center m-16 sm:mx-auto sm:w-full sm:max-w-md">
+        <h1 class="text-3xl font-bold text-gray-900">
+            Alterar Perfil
+        </h1>
+        </div>
+        <div class="text-center sm:mx-auto sm:w-full sm:max-w-md">
+        <label for="name">Nome do Usuário</label>
+        @!input({
+            name: 'full_name',
+            type: 'text',
+            value: user.fullName
+        })
+        </div>
+        <div class="text-center sm:mx-auto sm:w-full sm:max-w-md">
+        <label for="email">Email do Usuário</label>
+        @!input({
+            name: 'email',
+            type: 'email',
+            value: user.email
+        })
+        </div>
+        <div class="text-center sm:mx-auto sm:w-full sm:max-w-md">
+        <label for="password">Senha do Usuário</label>
+        @!input({
+            name: 'password',
+            type: 'password'
+        })
+        </div>
+        @button({
+        type: 'submit',
+        class: 'text-center m-16 sm:mx-auto sm:w-full sm:max-w-md'
+        })
+        Salvar
+        @end
+    @end
+</form>

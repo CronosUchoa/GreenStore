@@ -1,0 +1,19 @@
+@layouts.app() 
+
+<div class="flex items-center justify-center h-screen">
+ <div class="w-full max-w-7xl">
+   <h1 class="text-2xl font-bold mb-4 text-center">Produtos na categoria "Xbox"</h1>
+   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+     @each(product in products)
+       <div class="bg-slate-200 p-4 rounded-lg shadow w-full max-w-xs">
+         <p class="font-semibold">Nome:</p>
+         <p>{{ product.name }}</p>
+         <img src="http://localhost:3333/{{product.image}}" alt="{{ product.name }}" class="mt-4 w-full" />
+            {{--  <img src="resources/images/logo.png" alt="Logo" class="w-16 h-16 rounded-full">  --}}
+         <p class="mt-2 text-sm text-gray-700">Preço: {{ product.price }}</p>
+       </div>
+     @end
+   </div>
+ </div>
+</div>
+@end  

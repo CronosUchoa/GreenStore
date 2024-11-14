@@ -1,0 +1,28 @@
+@layouts.app()
+  <main>
+    <div id="teste">
+      <div>Produtos
+        @!svg('heroicons:arrow-left-solid', { class: 'w-6 h-6 text-red-500' })
+      </div>
+      <ul>
+        @include('pages/products/partials/products')
+      </ul>
+    </div>
+  </main>
+
+  <div x-data="{
+      like: false,
+      changeState() {
+        this.like = !this.like
+      },
+    }">
+    <button @click="changeState()">
+        @!svg('heroicons:heart', {
+          id: 'heart',
+          class: 'h-10 w-10 sm:h-20 sm:w-20',
+          ":class": `like ? 'text-red-500' : ''`
+        })
+      </span>
+    </button>
+  </div>
+@end
