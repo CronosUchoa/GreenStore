@@ -41,7 +41,8 @@ router
     router.patch('/products/:id', [ProductsController, 'patch']).as('products.patch')
     router.post('/products', [ProductsController, 'store']).as('products.store')
   })
-    // router.get('/products/:id', [ProductsController, 'show']).as('products.show')
+router.get('/products/pc', [ProductsController, 'pc']).as('products.pc')
+
 
     //PC
     router.get('/products/epicGames', [ProductsController, 'epicGames']).as('products.epicGames')
@@ -49,7 +50,6 @@ router
     router.get('/products/rockstarSocialClub', [ProductsController, 'rockstarSocialClub']).as('products.rockstarSocialClub')
     router.get('/products/stream', [ProductsController, 'stream']).as('products.stream')
     router.get('/products/ubisoftConnect', [ProductsController, 'ubisoftConnect']).as('products.ubisoftConnect')
-    router.get('/products/pc', [ProductsController, 'pc']).as('products.pc')
 
 
     //Console
@@ -66,6 +66,9 @@ router
     router.get('/products/fps', [ProductsController, 'fps']).as('products.fps')
     router.get('/products/mmorpg', [ProductsController, 'mmorpg']).as('products.mmorpg')
     router.get('/products/rpg', [ProductsController, 'rpg']).as('products.rpg')
+
+  router.get('/products/:id', [ProductsController, 'show']).as('products.show')
+
 
 
   .use(middleware.auth())

@@ -1,13 +1,16 @@
 @layouts.app()
-  <div>
-    <div class="bg-slate-200">
-      <p>
-      Nome:
-      {{ product.name }}
+<div class="mt-20 flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+    <div class="bg-slate-200 p-4 rounded-md mb-4">
+      <p class="text-lg font-bold text-gray-700">
+        Nome: {{ product.name }}
       </p>
-    </div>
-    <div>
-      categoria {{ product.category.name }}
+      <p>Preço {{product.price}}</p>
+      <img src="http://localhost:3333/{{product.image}}" alt="{{ product.name }}" class="mt-4 w-full" />
+
+    <div class="text-gray-600">
+      <p>Descrição: {{ product.description }}</p>
     </div>
   </div>
+</div>
+
 @end

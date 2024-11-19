@@ -25,13 +25,23 @@ export default class ProductsController {
     return view.render('pages/products/index', { products })
   }
 
- /*   async show({ view, params }: HttpContext) {
+    async show({ view, params }: HttpContext) {
      const product = await Product.findOrFail(params.id)
-     await product.load('category')
+     //await product.load('category')
+     //console.log(product)
 
     return view.render('pages/products/show', { product })
-  } */
+  }
+  async pc({ view }: HttpContext) {
+    const products = await Product.query()
+    .whereHas('device', (query) => {
+        query.where('name', 'PC');  //precisa de ajuste para categoria correta quando popular o banco
+    })
+    .preload('category')
+    .paginate(1, 4);
 
+    return view.render('pages/products/PC/pc', { products });
+  }
   async store({ request,response }: HttpContext) {
 
     const payload = request.only(['name', 'price', 'description','image','deviceId','categoryId'])//await request.validateUsing(createProductValidator)
@@ -131,16 +141,7 @@ export default class ProductsController {
 
     return view.render('pages/products/PC/ubisoftConnect', { products });
     }
-    async pc({ view }: HttpContext) {
-      const products = await Product.query()
-      .whereHas('device', (query) => {
-          query.where('name', 'PC');  //precisa de ajuste para categoria correta quando popular o banco
-      })
-      .preload('category')
-      .paginate(1, 4);
 
-      return view.render('pages/products/PC/pc', { products });
-    }
     async ubisoftConnect({ view }: HttpContext) {
       const products = await Product.query()
       .whereHas('category', (query) => {
