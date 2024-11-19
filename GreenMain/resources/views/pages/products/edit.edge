@@ -1,0 +1,71 @@
+@layouts.app()
+
+<div style="width: 400px; height: 400px; background-color: white;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);">
+
+            @each(product in products)
+        <div class="mb-4 border-b pb-2">
+            <p class="font-bold">{{ product.name }}</p>
+
+            <!-- Botão para ativar edição -->
+            <form method="POST" action="{{route('products.patch', { id: product.id })}}?_method=patch">
+              @if(request.input('edit') == product.id)
+                    <!-- Exibe o formulário de edição -->
+                    <label for="name">Nome do Game</label>
+
+                    @!input({
+                      name: 'name',
+                      type: 'text',
+                      value: product.name
+
+                    })
+
+                    <label for="price">Preço do Game</label>
+
+                    @!input({
+                      name: 'price',
+                      type: 'text',
+                      value: product.price
+
+                    })
+
+                    <label for="description">Descrição do Game</label>
+
+                    @!input({
+                      name: 'description',
+                      type: 'text',
+                      value: product.description
+
+                    })
+
+                    <label for="image">Image do Game</label>
+
+                    @!input({
+                      name: 'image',
+                      type: 'text',
+                      value: product.image
+
+                    })
+
+
+                    <button
+                        type="submit"
+                        class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                        Salvar
+                    </button>
+                @else
+                    <!-- Exibe o botão de edição -->
+                    <a
+                        href="?edit={{ product.id }}"
+                        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                        Editar
+                    </a>
+                @endif
+            </form>
+        </div>
+    @endeach
+</div>
+
+@end
+

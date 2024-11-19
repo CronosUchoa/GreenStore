@@ -14,8 +14,9 @@ const ProductsController = () => import('#controllers/products_controller')
 const AuthController = () => import('#controllers/auth_controller')
 const CategoryController = () => import('#controllers/categories_controller')
 const DeviceController = () => import('#controllers/device_controller')
+const HomeController = () => import('#controllers/home_controller')
 
-router.on('/').render('pages/home/show').as('home.show')
+router.get('/', [HomeController, 'show']).as('home.show')
 
 router.get('/login', [AuthController, 'create']).as('auth.create')
 router.post('/login', [AuthController, 'store']).as('auth.store')
@@ -34,6 +35,8 @@ router
     router.get('/products', [ProductsController, 'index']).as('products.index')
     router.get('/products/new', [ProductsController, 'create']).as('products.create')
     router.get('/products/delete', [ProductsController, 'delete']).as('products.delete')
+    router.get('/products/edit', [ProductsController, 'edit']).as('products.edit')
+
     router.delete('/products/:id', [ProductsController, 'destroy']).as('products.destroy')
     router.patch('/products/:id', [ProductsController, 'patch']).as('products.patch')
     router.post('/products', [ProductsController, 'store']).as('products.store')
@@ -46,6 +49,8 @@ router
     router.get('/products/rockstarSocialClub', [ProductsController, 'rockstarSocialClub']).as('products.rockstarSocialClub')
     router.get('/products/stream', [ProductsController, 'stream']).as('products.stream')
     router.get('/products/ubisoftConnect', [ProductsController, 'ubisoftConnect']).as('products.ubisoftConnect')
+    router.get('/products/pc', [ProductsController, 'pc']).as('products.pc')
+
 
     //Console
     router.get('/products/nintendo', [ProductsController, 'nintendo']).as('products.nintendo')
@@ -61,7 +66,7 @@ router
     router.get('/products/fps', [ProductsController, 'fps']).as('products.fps')
     router.get('/products/mmorpg', [ProductsController, 'mmorpg']).as('products.mmorpg')
     router.get('/products/rpg', [ProductsController, 'rpg']).as('products.rpg')
-   
+
 
   .use(middleware.auth())
 

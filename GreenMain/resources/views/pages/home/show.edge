@@ -1,5 +1,107 @@
 @layouts.app()
-  <div>
 
+<body>
+  <!-- Carrossel -->
+  <div class="relative w-full max-w-5xl mx-auto overflow-hidden mt-16">
+    <div class="flex transition-transform duration-1000 ease-in-out mt-16" id="carousel-track">
+      <!-- Slide 1 -->
+      <div class="flex flex-shrink-0 justify-center gap-4 w-full">
+        <img src="resources\images\pc\stream\BatmanArkhamCollectionStream.jpg" alt="Imagem Grande"
+             class="w-1/2 h-72 object-cover rounded-lg shadow-md">
+        <div class="flex flex-col gap-4 w-1/2">
+          <img src="resources\images\pc\stream\CAPA-God-of-WAR.jpg"
+          alt="Imagem Pequena 1"
+          class="h-36 w-full object-contain rounded-lg shadow-md">
+
+          <img src="resources\images\pc\stream\Middle-earthShadowofWarDefinitiveEditionStream.jpg" alt="Imagem Pequena 2"
+               class="h-36 object-cover rounded-lg shadow-md">
+        </div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="flex flex-shrink-0 justify-center gap-4 w-full h-72">
+        <img src="resources\images\pc\stream\fc25.jpg" alt="Imagem Grande"
+             class="w-1/2 h-full object-contain rounded-lg shadow-md ">
+        <div class="flex flex-col gap-4 w-1/2">
+          <img src="resources\images\pc\stream\residente4.jpg" alt="Imagem Pequena 1"
+               class="h-1/2 object-contain rounded-lg shadow-md">
+          <img src="resources\images\pc\stream\zelda.jpg" alt="Imagem Pequena 2"
+               class="h-1/2 object-contain rounded-lg shadow-md">
+        </div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="flex flex-shrink-0 justify-center gap-4 w-full">
+        <img src="resources\images\pc\stream\NFS_mobile.jpg" alt="Imagem Grande"
+             class="w-1/2 h-72 object-contain rounded-lg shadow-md">
+        <div class="flex flex-col gap-4 w-1/2">
+          <img src="resources\images\pc\stream\assassins-creed-syndicate.jpg" alt="Imagem Pequena 1"
+               class="h-36 object-contain rounded-lg shadow-md">
+          <img src="resources\images\pc\stream\hogwats_capa.jpg" alt="Imagem Pequena 2"
+               class="h-36 object-contain rounded-lg shadow-md">
+        </div>
+      </div>
+    </div>
+
+    <!-- Botões de navegação -->
+    <button
+      class="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 shadow-md hover:bg-opacity-75"
+      onclick="prevSlide()">
+      &#8249;
+    </button>
+    <button
+      class="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 shadow-md hover:bg-opacity-75"
+      onclick="nextSlide()">
+      &#8250;
+    </button>
   </div>
+
+  <!-- Grid dos produtos -->
+  <div class="mt-16 flex justify-center items-center min-h-screen">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
+      @each(product in products)
+        <div class="relative p-4 rounded-lg shadow w-full h-auto max-w-xs overflow-hidden group">
+          <!-- Imagem -->
+          <p>{{ product.name }}</p>
+          <img src="http://localhost:3333/{{ product.image }}" alt="{{ product.name }}"
+               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+          <p class="mt-2 text-sm text-gray-700">Preço: {{ product.price }}</p>
+
+          <!-- Detalhes que sobem -->
+          <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-90 p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
+            <p class="font-semibold text-lg">{{ product.description }}</p>
+            <p class="text-gray-700 text-sm">Preço: R$ {{ product.price }}</p>
+          </div>
+        </div>
+      @endeach
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const track = document.getElementById('carousel-track');
+    const slides = track.children;
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+
+    // Atualizar carrossel
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Próximo slide
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    // Slide anterior
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    // Troca automática a cada 15 segundos
+    setInterval(nextSlide, 15000);
+  </script>
+</body>
+
 @end
