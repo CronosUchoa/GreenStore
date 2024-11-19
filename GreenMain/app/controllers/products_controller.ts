@@ -139,7 +139,7 @@ export default class ProductsController {
     .preload('category')
     .paginate(1, 4);
 
-    return view.render('pages/products/PC/ubisoftConnect', { products });
+    return view.render('pages/products/PC/Stream', { products });
     }
 
     async ubisoftConnect({ view }: HttpContext) {
