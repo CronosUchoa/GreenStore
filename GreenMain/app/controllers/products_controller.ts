@@ -64,8 +64,10 @@ export default class ProductsController {
   async edit({ view }: HttpContext) {
 
     const products = await Product.all();
+    const devices = await Device.all();
 
-    return view.render('pages/products/edit',{products})
+
+    return view.render('pages/products/edit',{products, devices})
   }
 
   async patch({ params, request,response}: HttpContext) {
@@ -100,8 +102,8 @@ export default class ProductsController {
 
   async epicGames({ view }: HttpContext) {
     const products = await Product.query()
-    .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+    .whereHas('device', (query) => {
+        query.where('name', 'Epic');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
     .paginate(1, 4);
@@ -122,8 +124,8 @@ export default class ProductsController {
 
   async rockstarSocialClub({ view }: HttpContext) {
     const products = await Product.query()
-    .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+    .whereHas('device', (query) => {
+        query.where('name', 'RockStar');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
     .paginate(1, 4);
@@ -133,19 +135,19 @@ export default class ProductsController {
 
   async stream({ view }: HttpContext) {
     const products = await Product.query()
-    .whereHas('category', (query) => {
-        query.where('name', 'Stream');
+    .whereHas('device', (query) => {
+        query.where('name', 'Steam');
     })
     .preload('category')
     .paginate(1, 4);
 
-    return view.render('pages/products/PC/Stream', { products });
+    return view.render('pages/products/PC/stream', { products });
     }
 
     async ubisoftConnect({ view }: HttpContext) {
       const products = await Product.query()
-      .whereHas('category', (query) => {
-          query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+      .whereHas('device', (query) => {
+          query.where('name', 'Ubisoft');  //precisa de ajuste para categoria correta quando popular o banco
       })
       .preload('category')
       .paginate(1, 4);
@@ -212,7 +214,7 @@ export default class ProductsController {
   async battleRoyale({ view }: HttpContext) {
     const products = await Product.query()
     .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+        query.where('name', 'Batle Royale');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
     .paginate(1, 4);
@@ -222,7 +224,7 @@ export default class ProductsController {
   async fps({ view }: HttpContext) {
     const products = await Product.query()
     .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+        query.where('name', 'FPS');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
     .paginate(1, 4);

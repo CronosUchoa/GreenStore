@@ -47,20 +47,31 @@
                       value: product.image
 
                     })
+                    {{-- <div>
+                    <label for="deviceId" >
+                      Loja
+                    </label>
+                    <select name="deviceId">
+                      @each(device in devices)
+                        <option value="{{ product.device }}">{{ device.name }}</option>
+                      @end
+
+                    </select>
+                  </div> --}}
 
 
                     <button
                         type="submit"
-                        class="bg-green-500 text-white py-4 px-4 rounded hover:bg-green-600">
+                        class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
                         Salvar
                     </button>
                 @else
                     <!-- Exibe o botão de edição -->
-                    <button
+                    <a
                         href="?edit={{ product.id }}"
-                        class="bg-blue-500 text-white py-4 px-4 rounded hover:bg-blue-600">
+                        class="mt-4 bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600 ">
                         Editar
-                    </button>
+                    </a>
                 @endif
             </form>
         </div>
