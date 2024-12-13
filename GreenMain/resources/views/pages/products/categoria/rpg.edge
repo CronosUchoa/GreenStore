@@ -7,12 +7,19 @@
      @each(product in products)
      <div class="bg-gray-50 p-4 rounded-lg shadow w-full max-w-xs">
          <p>{{ product.name }}</p>
-         <img src="http://localhost:3333/{{product.image}}" alt="{{ product.name }}" class="mt-4 w-full" />
+         <img src="{{product.image}}" alt="{{ product.name }}" class="mt-4 w-full" />
             {{--  <img src="resources/images/logo.png" alt="Logo" class="w-16 h-16 rounded-full">  --}}
          <p class="mt-2 text-sm text-gray-700">Preço: {{ product.price }}</p>
        </div>
      @end
    </div>
+   <div>
+    @each(anchor in products.getUrlsForRange(1, products.lastPage))
+      <a href="{{ anchor.url }}">
+        {{ anchor.page }}
+      </a>
+    @endeach
+  </div>
  </div>
 </div>
 @end

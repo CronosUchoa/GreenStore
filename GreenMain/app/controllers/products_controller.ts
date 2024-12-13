@@ -22,6 +22,8 @@ export default class ProductsController {
 
     const products = await query.paginate(page, limit)
 
+    products.baseUrl('/products')
+
     return view.render('pages/products/index', { products })
   }
 
@@ -100,155 +102,203 @@ export default class ProductsController {
 
   //pc
 
-  async epicGames({ view }: HttpContext) {
+  async epicGames({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4; 
     const products = await Product.query()
-    .whereHas('device', (query) => {
-        query.where('name', 'Epic');  //precisa de ajuste para categoria correta quando popular o banco
+    .whereHas('category', (query) => {
+        query.where('name', 'Epic Games');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
+
+    products.baseUrl('/products/epicGames');
 
     return view.render('pages/products/PC/epicGames', { products });
   }
 
-  async roblox({ view }: HttpContext) {
+  async roblox({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4; 
     const products = await Product.query()
     .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+        query.where('name', 'Roblox');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
+
+    products.baseUrl('/products/roblox');
 
     return view.render('pages/products/PC/roblox', { products });
   }
 
-  async rockstarSocialClub({ view }: HttpContext) {
+  async rockstarSocialClub({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
-    .whereHas('device', (query) => {
-        query.where('name', 'RockStar');  //precisa de ajuste para categoria correta quando popular o banco
+    .whereHas('category', (query) => {
+        query.where('name', 'Rockstar Social Club');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
+
+    products.baseUrl('/products/rockstarSocialClub');
 
     return view.render('pages/products/PC/rockstarSocialClub', { products });
   }
 
-  async stream({ view }: HttpContext) {
+  async stream({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
-    .whereHas('device', (query) => {
+    .whereHas('category', (query) => {
         query.where('name', 'Steam');
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
+
+    products.baseUrl('/products/stream');
 
     return view.render('pages/products/PC/stream', { products });
     }
 
-    async ubisoftConnect({ view }: HttpContext) {
+    async ubisoftConnect({ request, view }: HttpContext) {
+      const page = request.input('page', 1); 
+      const limit = 4;
       const products = await Product.query()
-      .whereHas('device', (query) => {
-          query.where('name', 'Ubisoft');  //precisa de ajuste para categoria correta quando popular o banco
+      .whereHas('category', (query) => {
+          query.where('name', 'Ubisoft Connect');  //precisa de ajuste para categoria correta quando popular o banco
       })
       .preload('category')
-      .paginate(1, 4);
+      .paginate(page, limit);
+
+      products.baseUrl('/products/ubisoftConnect');
 
       return view.render('pages/products/PC/ubisoftConnect', { products });
     }
 
   //console
-    async nintendo({ view }: HttpContext) {
+    async nintendo({ request, view }: HttpContext) {
+      const page = request.input('page', 1); 
+      const limit = 4;
       const products = await Product.query()
-      .whereHas('device', (query) => {
+      .whereHas('category', (query) => {
           query.where('name', 'Nintendo');  //precisa de ajuste para categoria correta quando popular o banco
       })
       .preload('category')
-      .paginate(1, 4);
+      .paginate(page, limit);
+
+      products.baseUrl('/products/nintendo');
 
       return view.render('pages/products/console/nintendo', { products });
     }
-  async playStation({ view }: HttpContext) {
+  async playStation({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4; 
     const products = await Product.query()
-    .whereHas('device', (query) => {
+    .whereHas('category', (query) => {
         query.where('name', 'PlayStation');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
-
+    .paginate(page, limit);
+    
+    products.baseUrl('/products/playStation');
     return view.render('pages/products/console/playStation', { products });
   }
-  async xbox({ view }: HttpContext) {
+  async xbox({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
-    .whereHas('device', (query) => {
+    .whereHas('category', (query) => {
         query.where('name', 'Xbox');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
 
+    products.baseUrl('/products/xbox');
     return view.render('pages/products/console/xbox', { products });
   }
 
   //mobile
-  async appStore({ view }: HttpContext) {
+  async appStore({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+        query.where('name', 'App Store');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
 
+    products.baseUrl('/products/appStore');
     return view.render('pages/products/mobile/appStore', { products });
   }
 
-  async googlePlay({ view }: HttpContext) {
+  async googlePlay({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
-    .whereHas('device', (query) => {
-        query.where('name', 'Android'); //precisa de ajuste para categoria correta quando popular o banco
+    .whereHas('category', (query) => {
+        query.where('name', 'Google Play'); //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
 
+    products.baseUrl('/products/googlePlay');
     return view.render('pages/products/mobile/googlePlay', { products });
   }
 
   //Categoria
-  async battleRoyale({ view }: HttpContext) {
+  async battleRoyale({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
-        query.where('name', 'Batle Royale');  //precisa de ajuste para categoria correta quando popular o banco
+        query.where('name', 'Battler Royale');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
 
+    products.baseUrl('/products/battleRoyale');
     return view.render('pages/products/categoria/battleRoyale', { products });
   }
-  async fps({ view }: HttpContext) {
+  async fps({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
         query.where('name', 'FPS');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
 
+    products.baseUrl('/products/fps');
     return view.render('pages/products/categoria/fps', { products });
   }
-  async mmorpg({ view }: HttpContext) {
+  async mmorpg({ request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+        query.where('name', 'MMORPG');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
 
+    products.baseUrl('/products/mmorpg');
     return view.render('pages/products/categoria/mmorpg', { products });
   }
-  async rpg({ view }: HttpContext) {
+  async rpg({request, view }: HttpContext) {
+    const page = request.input('page', 1); 
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
-        query.where('name', 'Stream');  //precisa de ajuste para categoria correta quando popular o banco
+        query.where('name', 'RPG');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
-    .paginate(1, 4);
+    .paginate(page, limit);
 
+    products.baseUrl('/products/rpg');
     return view.render('pages/products/categoria/rpg', { products });
   }
 }
