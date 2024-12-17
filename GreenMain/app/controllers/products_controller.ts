@@ -29,7 +29,8 @@ export default class ProductsController {
 
     async show({ view, params }: HttpContext) {
      const product = await Product.findOrFail(params.id)
-     //await product.load('category')
+     await product.load('category')
+     await product.load('device')
      //console.log(product)
 
     return view.render('pages/products/show', { product })
@@ -103,8 +104,8 @@ export default class ProductsController {
   //pc
 
   async epicGames({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
-    const limit = 4; 
+    const page = request.input('page', 1);
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
         query.where('name', 'Epic Games');  //precisa de ajuste para categoria correta quando popular o banco
@@ -118,8 +119,8 @@ export default class ProductsController {
   }
 
   async roblox({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
-    const limit = 4; 
+    const page = request.input('page', 1);
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
         query.where('name', 'Roblox');  //precisa de ajuste para categoria correta quando popular o banco
@@ -133,7 +134,7 @@ export default class ProductsController {
   }
 
   async rockstarSocialClub({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -148,7 +149,7 @@ export default class ProductsController {
   }
 
   async stream({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -163,7 +164,7 @@ export default class ProductsController {
     }
 
     async ubisoftConnect({ request, view }: HttpContext) {
-      const page = request.input('page', 1); 
+      const page = request.input('page', 1);
       const limit = 4;
       const products = await Product.query()
       .whereHas('category', (query) => {
@@ -179,7 +180,7 @@ export default class ProductsController {
 
   //console
     async nintendo({ request, view }: HttpContext) {
-      const page = request.input('page', 1); 
+      const page = request.input('page', 1);
       const limit = 4;
       const products = await Product.query()
       .whereHas('category', (query) => {
@@ -193,20 +194,20 @@ export default class ProductsController {
       return view.render('pages/products/console/nintendo', { products });
     }
   async playStation({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
-    const limit = 4; 
+    const page = request.input('page', 1);
+    const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
         query.where('name', 'PlayStation');  //precisa de ajuste para categoria correta quando popular o banco
     })
     .preload('category')
     .paginate(page, limit);
-    
+
     products.baseUrl('/products/playStation');
     return view.render('pages/products/console/playStation', { products });
   }
   async xbox({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -221,7 +222,7 @@ export default class ProductsController {
 
   //mobile
   async appStore({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -235,7 +236,7 @@ export default class ProductsController {
   }
 
   async googlePlay({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -250,7 +251,7 @@ export default class ProductsController {
 
   //Categoria
   async battleRoyale({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -263,7 +264,7 @@ export default class ProductsController {
     return view.render('pages/products/categoria/battleRoyale', { products });
   }
   async fps({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -276,7 +277,7 @@ export default class ProductsController {
     return view.render('pages/products/categoria/fps', { products });
   }
   async mmorpg({ request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {
@@ -289,7 +290,7 @@ export default class ProductsController {
     return view.render('pages/products/categoria/mmorpg', { products });
   }
   async rpg({request, view }: HttpContext) {
-    const page = request.input('page', 1); 
+    const page = request.input('page', 1);
     const limit = 4;
     const products = await Product.query()
     .whereHas('category', (query) => {

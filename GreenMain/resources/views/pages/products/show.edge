@@ -1,5 +1,5 @@
 @layouts.app()
-<div class="mt-20 flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+<{{-- div class="mt-20 flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
     <div class="bg-slate-200 p-4 rounded-md mb-4">
       <p class="text-lg font-bold text-gray-700">
         Nome: {{ product.name }}
@@ -11,6 +11,57 @@
       <p>Descrição: {{ product.description }}</p>
     </div>
   </div>
-</div>
+</> --}}
+<div class="mt-20 min-h-screen bg-gray-300 text-black p-6">
+  <div class="container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Seção do Vídeo/Imagem -->
+      <div class="lg:col-span-8 min-h-full">
+          <!-- Vídeo ou Imagem -->
+          <div class="rounded-lg overflow-hidden shadow-lg mb-6">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
 
+          </div>
+        {{-- <!-- Miniaturas ou Galeria -->
+          <div class="grid grid-cols-4 gap-4">
+              <img src="{{ product.image }}" class="rounded-lg cursor-pointer hover:scale-105 transition-transform" alt="{{ product.name }}">
+              <img src="{{ product.image2 }}" class="rounded-lg cursor-pointer hover:scale-105 transition-transform" alt="{{ product.name }}">
+              <img src="{{ product.image3 }}" class="rounded-lg cursor-pointer hover:scale-105 transition-transform" alt="{{ product.name }}">
+              <img src="{{ product.image4 }}" class="rounded-lg cursor-pointer hover:scale-105 transition-transform" alt="{{ product.name }}">
+          </div> --}}
+      </div>
+
+      <!-- Seção de Informações do Produto -->
+      <div class="lg:col-span-4 bg-gray-200 p-6 rounded-lg shadow-lg min-h-full">
+          <h1 class="text-xl font-bold mb-2">{{ product.name }}</h1>
+          <p class="text-xl text-red-400 font-semibold mb-4">R$ {{ product.price }}</p>
+          <p class="mb-4 text-black">{{ product.description }}</p>
+
+          <!-- Especificações -->
+          <ul class="text-black mb-6">
+              {{-- <li><strong>Categoria:</strong> {{ product.category }}</li> --}}
+              <li><strong>Loja:</strong> {{ product.category.name }}</li>
+              <li><strong>Plataforma:</strong> {{ product.device.name }}</li>
+
+              {{-- <li><strong>Desenvolvedor:</strong> {{ product.developer }}</li>
+              <li><strong>Lançamento:</strong> {{ product.release_date }}</li>
+              <li><strong>Classificação:</strong> {{ product.rating }}</li> --}}
+          </ul>
+
+          <form method="POST" action="{{ route('cart_items.store') }}">
+  <input type="hidden" name="productId" value="{{ product.id }}">
+  <button
+    type="submit"
+    class="mt-2 w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-700 transition"
+  >
+    Adicionar ao Carrinho
+  </button>
+</form>
+          <button class="mt-2 w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-700 transition">
+              Comprar Agora
+          </button>
+      </div>
+  </div>
+</div>
+</div>
+@end
 @end

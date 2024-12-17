@@ -1,7 +1,7 @@
 @layouts.app()
 
 <body>
-  
+
   <!-- Carrossel -->
   <div class="relative w-full max-w-5xl mx-auto overflow-hidden mt-16">
     <div class="flex transition-transform duration-1000 ease-in-out mt-16" id="carousel-track">
@@ -59,21 +59,18 @@
   <div class="mt-16 flex justify-center items-center min-h-screen">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
       @each(product in products)
-      <div class="relative p-4 rounded-lg shadow w-full h-auto max-w-xs overflow-hidden group">
+      <div class="relative p-4 rounded-lg shadow-lg w-full h-auto max-w-xs overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-105">
+        <a href="{{ route('products.show', {id: product.id})}}" >
+            <!-- Imagem -->
+            <p class="text-center   text-gray-800 mb-2 h-12 line-clamp-2">{{ product.name }}</p>
+            <div class="w-full h-48 flex items-center justify-center">
+              <img src="{{ product.image }}" alt="{{ product.name }}"
+                   class="h-full object-contain ">
+            </div>
+            <p class="mt-2 text-sm text-black-700">Preço: {{ product.price }}</p>
 
-      <a href="{{ route('products.show', {id: product.id})}}" >
-          <!-- Imagem -->
-          <p>{{ product.name }}</p>
-          <img src="{{ product.image }}" alt="{{ product.name }}"
-               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-          <p class="mt-2 text-sm text-gray-700">Preço: {{ product.price }}</p>
 
-          <!-- Detalhes que sobem -->
-          <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-90 p-4 transform translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-            <p class="font-semibold text-lg">{{ product.description }}</p>
-            <p class="text-gray-700 text-sm">Preço: R$ {{ product.price }}</p>
-          </div>
-      </a>
+        </a>
     </div>
 
       @endeach

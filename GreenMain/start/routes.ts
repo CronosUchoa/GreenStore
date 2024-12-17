@@ -15,6 +15,7 @@ const AuthController = () => import('#controllers/auth_controller')
 const CategoryController = () => import('#controllers/categories_controller')
 const DeviceController = () => import('#controllers/device_controller')
 const HomeController = () => import('#controllers/home_controller')
+const CartController = () => import('#controllers/cart_controller')
 
 router.get('/', [HomeController, 'show']).as('home.show')
 
@@ -67,11 +68,8 @@ router.get('/products/pc', [ProductsController, 'pc']).as('products.pc')
     router.get('/products/mmorpg', [ProductsController, 'mmorpg']).as('products.mmorpg')
     router.get('/products/rpg', [ProductsController, 'rpg']).as('products.rpg')
 
-  router.get('/products/:id', [ProductsController, 'show']).as('products.show')
-
-
-
-  .use(middleware.auth())
+    router.get('/products/:id', [ProductsController, 'show']).as('products.show')
+.use(middleware.auth())
 
 router.get('/categories/new', [CategoryController, 'create']).as('categories.create')
 router.get('/categories/:id', [CategoryController, 'show']).as('categories.show')
@@ -80,3 +78,14 @@ router.post('/categories', [CategoryController, 'store']).as('categories.store')
 router.get('/devices/new', [DeviceController, 'create']).as('devices.create')
 router.get('/devices/:id', [DeviceController, 'show']).as('devices.show')
 router.post('/devices', [DeviceController, 'store']).as('devices.store')
+
+router
+  .group(() => {
+    router.get('/cart', [CartController, 'index']).as('car_items.index')
+    router.post('/cart', [CartController, 'store']).as('car_items.store')
+    router.put('/cart/:id', [CartController, 'update']).as('car_items.update')
+    router.delete('/cart/:id', [CartController, 'destroy']).as('car_items.destroy')
+  })
+  .use(middleware.auth())
+router.post('/cart-items', [CartController, 'store']).use(middleware.auth()).as('cart_items.store')
+

@@ -2,24 +2,27 @@
 
  <div class="flex items-center justify-center h-screen">
   <div class="w-full max-w-7xl">
-    <h1 class="text-2xl font-bold mb-4 text-center">Produtos na categoria "Stream"</h1>
+    <h1 class="text-2xl font-bold mb-4 text-center">Produtos na categoria "Steam"</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
       @each(product in products)
-        <div class="bg-slate-200 p-4 rounded-lg shadow w-full max-w-xs">
-          <a href="{{ route('products.show', {id: product.id})}}" >
+      <div class="relative p-4 rounded-lg shadow-lg w-full h-auto max-w-xs overflow-hidden flex flex-col group transition-transform duration-300 hover:scale-105">
+        <a href="{{ route('products.show', {id: product.id})}}" >
+            <!-- Imagem -->
+            <p class="text-center   text-gray-800 mb-2 h-12 line-clamp-2">{{ product.name }}</p>
+            <div class="w-full h-48 flex items-center justify-center">
+              <img src="{{ product.image }}" alt="{{ product.name }}"
+                   class="h-full object-contain ">
+            </div>
+            <p class="mt-2 text-sm text-black-700">Preço: {{ product.price }}</p>
 
-          <p class="font-semibold">Nome:</p>
-          <p>{{ product.name }}</p>
-          <img src="{{product.image}}" alt="{{ product.name }}" class="mt-4 w-full" />
-             {{--  <img src="resources/images/logo.png" alt="Logo" class="w-16 h-16 rounded-full">  --}}
-          <p class="mt-2 text-sm text-gray-700">Preço: {{ product.price }}</p>
-          </a>
-        </div>
+
+        </a>
+    </div>
       @end
     </div>
-    <div>
+    <div class="mt-8 flex justify-center items-center ">
       @each(anchor in products.getUrlsForRange(1, products.lastPage))
-        <a href="{{ anchor.url }}">
+        <a href="{{ anchor.url }}" class="ml-2">
           {{ anchor.page }}
         </a>
       @endeach
