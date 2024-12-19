@@ -4,6 +4,7 @@ import Product from "#models/product"
 import Category from "#models/category"
 import Device from "#models/device"
 
+
 import { createProductValidator } from "#validators/product"
 
 

@@ -84,8 +84,8 @@ router
     router.get('/cart', [CartController, 'index']).as('car_items.index')
     router.post('/cart', [CartController, 'store']).as('car_items.store')
     router.put('/cart/:id', [CartController, 'update']).as('car_items.update')
-    router.delete('/cart/:id', [CartController, 'destroy']).as('car_items.destroy')
+    router.post('/cart/:id', [CartController, 'destroy']).as('car_items.destroy')
   })
-  .use(middleware.auth())
+  //.use(middleware.auth())
 router.post('/cart-items', [CartController, 'store']).use(middleware.auth()).as('cart_items.store')
 

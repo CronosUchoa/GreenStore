@@ -22,18 +22,20 @@
             </div>
 
             <!-- Botão de remover -->
-            {{-- <form method="POST" action="{{ route('cart_items.destroy', { id: item.id }) }}">
-              <input type="hidden" name="_method" value="DELETE">
+            <form method="POST" action="{{route("car_items.destroy", { id: item.id })}}? method=delete">
+                <input type="hidden" name="_method" value="DELETE">
+
               <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition">
                 Remover
               </button>
-            </form> --}}
+            </form>
           </div>
           @endeach
         </div>
 
         <!-- Total geral -->
         <div class="mt-6 flex justify-end">
+
           <p class="text-xl font-bold text-gray-800">Total: R$ {{ total }}</p>
         </div>
       @else
@@ -43,5 +45,6 @@
   </div>
 
 </body>
+
 
 @end

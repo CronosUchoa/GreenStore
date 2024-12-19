@@ -2,6 +2,7 @@ import { HttpContext } from "@adonisjs/core/http"
 
 import CartItem from '#models/carItem'
 import Product from '#models/product'
+import { stringify } from "querystring"
 
 export default class CartController {
   // Listar itens do carrinho
@@ -13,16 +14,10 @@ export default class CartController {
       .where('user_id', user.id)
       .preload('product')
     const products = await Product.all()
+    //const total = cartItem.reduce((acc, item) => parseFloat(acc) + (parseFloat(item.product.price)), 0);
     const total = cartItem.reduce((sum, item) => {
-      //console.log(item.product.price);
-      //console.log(sum);
-
-      return Number(sum) + (item.product.price);
-    }, 0.0);
-
-
-
-    console.log(total);
+      return sum + (item.product.price);
+    }, 0.0); // Inicializa como número
 
     // Renderizar a página com dados
     return view.render('pages/users/carrinho', { cartItem, products,total })
@@ -73,7 +68,7 @@ export default class CartController {
   }
 
   // Remover item do carrinho
-  public async destroy({ auth, response, params }: HttpContext) {
+  public async destroy({ auth, response, params, view }: HttpContext) {
     const user = await auth.authenticate()
 
     const cartItem = await CartItem.query()
@@ -86,6 +81,6 @@ export default class CartController {
     }
 
     await cartItem.delete()
-    return response.noContent()
-  }
+    return response.redirect().back()
+   }
 }

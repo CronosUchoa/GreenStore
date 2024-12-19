@@ -47,7 +47,7 @@
               <li><strong>Classificação:</strong> {{ product.rating }}</li> --}}
           </ul>
 
-          <form method="POST" action="{{ route('cart_items.store') }}">
+          <form  id="add-to-cart-form" method="POST" action="{{ route('cart_items.store') }}">
   <input type="hidden" name="productId" value="{{ product.id }}">
   <button
     type="submit"
@@ -62,6 +62,36 @@
       </div>
   </div>
 </div>
+
 </div>
+
+<div id="confirmation-message" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-2 px-6 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-30000">
+  Produto adicionado ao carrinho!
+</div>
+</div>
+
+<script>
+// Função para exibir a mensagem de confirmação
+document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Impede o envio imediato do formulário
+
+  // Exibe a mensagem de confirmação
+  const confirmationMessage = document.getElementById('confirmation-message');
+  confirmationMessage.classList.remove('opacity-0', 'pointer-events-none');
+  confirmationMessage.classList.add('opacity-100', 'pointer-events-auto');
+
+  // Esconde a mensagem após 3 segundos
+  setTimeout(function() {
+    // Transição de desaparecimento suave
+    confirmationMessage.classList.remove('opacity-100', 'pointer-events-auto');
+    confirmationMessage.classList.add('opacity-0', 'pointer-events-none');
+
+    // Submete o formulário após desaparecer
+    setTimeout(function() {
+      document.getElementById('add-to-cart-form').submit();
+    }, 1000); // Aguarda a duração da transição CSS para submissão
+  }, 3000);
+});
+</script>
 @end
 @end
