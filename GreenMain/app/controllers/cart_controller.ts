@@ -13,9 +13,19 @@ export default class CartController {
       .where('user_id', user.id)
       .preload('product')
     const products = await Product.all()
+    const total = cartItem.reduce((sum, item) => {
+      //console.log(item.product.price);
+      //console.log(sum);
+
+      return Number(sum) + (item.product.price);
+    }, 0.0);
+
+
+
+    console.log(total);
 
     // Renderizar a página com dados
-    return view.render('pages/users/carrinho', { cartItem, products })
+    return view.render('pages/users/carrinho', { cartItem, products,total })
   }
 
   // Adicionar item ao carrinho
